@@ -1,0 +1,14 @@
+@media screen and (min-width: 1024px) {
+    .navbar,
+    .navbar-end,
+    .navbar-menu,
+    .navbar-start {
+      width: 100%;
+    }
+
+    .top-navbar{
+        padding: 1rem 2rem;
+        border-bottom: solid #e4e4e4;
+      }    
+  }
+
