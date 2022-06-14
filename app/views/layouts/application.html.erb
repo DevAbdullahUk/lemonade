@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
@@ -14,12 +13,35 @@
   <body>
     <div class="hero is-fullheight">
       <header class="has-text-centered is-fullwidth top-navbar"><%= render 'index/header' %></header>
+        
 
-      <div>
-        <%= yield %>
-      </div>
+            <!-- <p class="notice"><%= notice %></p> -->
+            
+          <%- if notice %>
+            <div class="notice message is-primary auth-notification">
+              <div class="message-body">
+                <%= notice %>
+              </div>
+            </div>
+            <% end %>
 
+
+            <%- if alert %>
+            <div class="alert message is-danger auth-notification">
+              <div class="message-body">
+                <%= alert %>
+              </div>
+            </div>
+            <% end %>
+
+
+            <div class="container">
+              <%= yield %>
+            </div>
+
+     
       <%= render 'index/footer' %>
     </div>
   </body>
+
 </html>
