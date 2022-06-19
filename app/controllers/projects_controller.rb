@@ -22,9 +22,9 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
-
+    
     respond_to do |format|
-      if @project.save
+      if @project.save && set_prject_users(@project.id)
         format.html { redirect_to project_url(@project), notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -67,4 +67,11 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description, :isPrivate, :projectId)
     end
+
+    def set_prject_users(project_id)
+      ProjectUser
+      .new(projectId:project_id , userId: current_user.id, accessLevel: 'uper')
+      .save
+    end
+
 end

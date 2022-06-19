@@ -2,10 +2,8 @@
   <p class="panel-heading">
     Projects
   </p>
-  <p class="panel-tabs">
-    <a class="is-active">Private</a>
-    <a>Public</a>
-  </p>
+
+
   <div class="panel-block">
     <p class="control has-icons-left">
       <input class="input is-primary" type="text" placeholder="Search">
@@ -14,36 +12,34 @@
       </span>
     </p>
   </div>
-  <a class="panel-block is-active">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    bulma
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    marksheet
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    minireset.css
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    jgthms.github.io
-  </a>
-  <div class="panel-block is-flex-direction-column">
-    <button class="button is-light is-fullwidth mb-1">
-      Project Settings
-    </button>
-    <button class="button is-primary is-fullwidth mt-1">
-      New Project
-    </button>
-  </div>
-</article>
+
+  <% if !@project_list.blank? %>
+    <% for project in @project_list %>
+
+      <a class="panel-block">
+        <span class="panel-icon">
+            <ion-icon name="briefcase"></ion-icon>
+        </span>
+
+            <%=  project.name %>
+            <% unless project.isPrivate %>
+                <span class="tag is-primary is-light is-rounded ml-1">Shared</span>
+            <% end %>
+           
+      </a>
+      
+    <% end %>
+  <% end %>
+
+
+
+    <div class="panel-block is-flex-direction-column">
+      <button id="project_settings_bt" class="button is-light is-fullwidth mb-1">
+        Join a Project
+      </button>
+      <button id="new_prject_bt" class="button is-primary is-fullwidth mt-1">
+        New Project
+      </button>
+    </div>
+  </article>
+  <%= render 'index/panel_modal'%>

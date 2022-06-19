@@ -20,6 +20,19 @@ body {
   width: 100%;
 }
 
+ .tabs ul, .tabs ul li a{
+  border: none !important;
+}
+
+
+.tabs.is-toggle li.is-active a{
+  color: #FFFF !important;
+  background-color: hsl(171, 100%, 41%) !important;
+  border: none;
+}
+
 
 @import url('./header.css');
 @import url('./userAuthScreen.css');
+
+

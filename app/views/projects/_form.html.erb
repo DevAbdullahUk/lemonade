@@ -1,37 +1,46 @@
-<%= form_with(model: project) do |form| %>
-  <% if project.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <section class="modal-card-body">
 
-      <ul>
-        <% project.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: @project) do |form| %>
+    <% if @project.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+        <ul>
+          <% @project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label "project name", style: "display: block", :class => "label" %>
+      <%= form.text_field :name, :class => "input" %>
     </div>
+   
+    <div class="field">
+      <%= form.label :description, style: "display: block", :class => "label" %>
+      <%= form.text_field :description, :class => 'input' %>
+    </div>
+   
+
+    <div class="field">
+      <%= form.label "The project Id", style: "display: block", :class => 'label' %>
+      <%= form.text_field :projectId, :class => 'input', readonly: true %>
+    </div>
+
+
+   <div class="field">
+      <label class="checkbox">
+       <%= form.check_box :isPrivate, :class => 'checkbox' %>
+        This a private project 
+      </label>
+    </div>
+
+
+    <br/>
+    <div>
+      <%= form.submit "Save new porject", :class => 'button is-primary' %>
+    </div>
+
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.label :isPrivate, style: "display: block" %>
-    <%= form.check_box :isPrivate %>
-  </div>
-
-  <div>
-    <%= form.label :projectId, style: "display: block" %>
-    <%= form.text_field :projectId %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</section>
