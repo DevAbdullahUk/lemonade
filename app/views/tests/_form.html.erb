@@ -1,0 +1,48 @@
+<div class="container is-fluid pt-5 pb-5">
+  <%= form_with(model: test) do |form| %>
+    <% if test.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+        <ul>
+          <% test.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class ='tile is-ancestor'>
+      <div class='tile is-parent is-3'>
+        <div class ='tile is-child'>
+          <div class='box'>
+            <div class='field'>
+              <%= form.label :name, style: "display: block" , :class => 'lable'%>
+              <%= form.text_field :name, :class => 'input'%>
+            </div>
+            <div class= 'field'>
+              <%= form.label :tag, style: "display: block", :class => 'lable' %>
+              <%= form.text_field :tag, :class => 'input' %>
+            </div>
+            <div class='field'>
+              <%= form.submit 'Save', :class => 'button is-primary' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='tile is-parent'>
+        <div class='tile is-child'>
+          <div class='field'>
+            <%= form.label :description, style: "display: block", :class => 'lable' %>
+            <%= form.rich_text_area :description %>
+          </div>
+          <div class= 'field'>
+            <%= form.label :steps, style: "display: block" %>
+            <%= form.text_field :steps, hidden: true, :id => "test-steps-input" %>
+          </div>
+          <div class= 'field'>
+            <%= render 'tests/test_steps'%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

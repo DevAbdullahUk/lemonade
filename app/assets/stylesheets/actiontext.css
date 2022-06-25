@@ -1,0 +1,81 @@
+/*
+ * Provides a drop-in pointer for the default Trix stylesheet that will format the toolbar and
+ * the trix-editor content (whether displayed or under editing). Feel free to incorporate this
+ * inclusion directly in any other asset bundle and remove this file.
+ *
+ *= require trix
+*/
+
+/*
+ * We need to override trix.css’s image gallery styles to accommodate the
+ * <action-text-attachment> element we wrap around attachments. Otherwise,
+ * images in galleries will be squished by the max-width: 33%; rule.
+*/
+.trix-content .attachment-gallery > action-text-attachment,
+.trix-content .attachment-gallery > .attachment {
+  flex: 1 0 33%;
+  padding: 0 0.5em;
+  max-width: 33%;
+}
+
+.trix-content
+  .attachment-gallery.attachment-gallery--2
+  > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--2 > .attachment,
+.trix-content
+  .attachment-gallery.attachment-gallery--4
+  > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--4 > .attachment {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.trix-content action-text-attachment .attachment {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+.trix-button {
+  moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  align-items: center !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  font-size: 0.7rem !important;
+  height: 2.5em !important;
+  justify-content: flex-start !important;
+  line-height: 1.5 !important;
+  padding-bottom: calc(0.5em - 1px) !important;
+  padding-left: calc(0.75em - 1px) !important;
+  padding-right: calc(0.75em - 1px) !important;
+  padding-top: calc(0.5em - 1px) !important;
+  position: relative !important;
+  vertical-align: top !important;
+  border-bottom: none !important;
+}
+
+.trix-button:hover{
+  background: hsl(0, 0%, 96%) !important;
+}
+
+trix-toolbar .trix-button.trix-active {
+  background: hsl(171, 100%, 41%)  !important;
+  color: #ffff !important;
+}
+
+.trix-button-group{
+  border-bottom-color: #bbb !important;
+}
+
+trix-editor {
+  background-color: #fff !important;
+  border-color: #dbdbdb !important;
+  border-radius: 4px !important;
+  color: #363636 !important;
+}
+
+.trix-button-group--history-tools{
+  background: hsl(0, 0%, 96%) !important;
+}

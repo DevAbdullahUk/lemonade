@@ -1,14 +1,25 @@
 @media screen and (min-width: 1024px) {
-    .navbar,
-    .navbar-end,
-    .navbar-menu,
-    .navbar-start {
-      width: 100%;
-    }
-
-    .top-navbar{
-        padding: 1rem 2rem;
-        border-bottom: solid #e4e4e4;
-      }    
+  .navbar,
+  .navbar-end,
+  .navbar-menu,
+  .navbar-start {
+    width: 100%;
   }
+
+  .top-navbar {
+    padding: 1rem 2rem;
+    border-bottom: solid #e4e4e4;
+  }
+
+  .dp-navbar-item:hover {
+    background-color: hsl(0, 0%, 14%) !important;
+    border-radius: 7px;
+  }
+
+  #navbarTop > .navbar-start > .navbar-item:hover,
+  #navbarTop > .navbar-start > .dropdown > .navbar-item:hover {
+   background-color: hsl(0, 0%, 96%);
+   border-radius: 7px;
+   color:hsl(171, 100%, 41%);
+}
 
