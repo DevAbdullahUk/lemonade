@@ -4,21 +4,17 @@
     <%= render 'index/panel' %>
   </div>
 
-  <div class="tile is-vertical is-parent">
-
-    <div class="tile is-child is-fullwidth" >
-    
-
-        <%= render 'index/tabs'%>
-
-
+  <div class="tile is-vertical is-fullwidth is-parent">
+    <div class="tile is-child top-tabs" >
+      <%= render 'index/tabs'%>
     </div>
-    
 
     <div class="tile is-child">
-        test
+      <%= render 'index/test_cases'%>
+    </div>
+
+    <div class="tile is-child">
+      <%= render 'index/home_pagination'%>
     </div>
   </div>
-
-
 </div>

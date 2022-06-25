@@ -20,19 +20,38 @@ body {
   width: 100%;
 }
 
- .tabs ul, .tabs ul li a{
+.tabs ul,
+.tabs ul li a {
   border: none !important;
 }
 
+.top-tabs {
+  flex-grow: 0 !important;
+}
 
-.tabs.is-toggle li.is-active a{
-  color: #FFFF !important;
+.tabs.is-toggle li.is-active a {
+  color: #ffff !important;
   background-color: hsl(171, 100%, 41%) !important;
   border: none;
 }
 
+.table-test-cases tbody tr:hover {
+  background-color: hsl(0, 0%, 96%);
+  cursor: pointer;
+}
 
-@import url('./header.css');
-@import url('./userAuthScreen.css');
+td span ion-icon {
+  font-size: 1.1rem;
+}
 
+ion-icon {
+  pointer-events: none;
+}
 
+.pagination .is-current{
+  background-color:hsl(171, 100%, 41%) !important;
+  border: hsl(171, 100%, 41%) !important;
+}
+
+@import url("./header.css");
+@import url("./userAuthScreen.css");
