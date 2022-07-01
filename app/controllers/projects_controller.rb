@@ -22,10 +22,11 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
-    
+    @project.projectId = SecureRandom.uuid
+
     respond_to do |format|
       if @project.save && set_prject_users(@project.id)
-        format.html { redirect_to project_url(@project), notice: "Project was successfully created." }
+        format.html { redirect_to root_path, notice: "Project: #{@project.name} was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,7 +66,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, :isPrivate, :projectId)
+      params.require(:project).permit(:name, :description, :isPrivate)
     end
 
     def set_prject_users(project_id)

@@ -15,6 +15,42 @@
         <div class ='tile is-child'>
           <div class='box'>
             <div class='field'>
+              <%= form.label :project, style: "display: block" , :class => 'lable'%>
+              <%= form.number_field :project_id, id: :test_project_id, hidden: true %>
+              <div class="dropdown is-hoverable" style="width: 100%">
+                <div class="dropdown-trigger is-fullwidth" style="width: 100%">
+                  <div type='button' class="input is-fullwidth bt-select-project" aria-haspopup="true" aria-controls="dropdown-project">
+                    
+                  </div>
+                </div>
+                <div class="dropdown-menu" style="width: 60%" id="dropdown-project" role="menu">
+                  <div class="dropdown-content">
+                    
+                    <% if !@project_list.blank? %>
+                      <% for project in @project_list %>
+                        <div class="dropdown-item is-clickable">
+                          <p value = <%= project.id %>
+                              class = <%= "dp-project-item" %>
+                          ><%= project.name %></p>
+                        </div>
+                      <% end %>
+                    <% else %>
+                      <div class="notification is-warning is-light has-background-white">
+                        <ion-icon name="alert-circle-outline" size='large'></ion-icon> <br/>
+                        <strong>No project is found </strong> 
+                        
+                        <hr class="dropdown-divider">
+                        You can't create a new test without a project.
+                        You can create a new project from 
+                        the main <%= link_to "test screen", root_path %>
+
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='field'>
               <%= form.label :name, style: "display: block" , :class => 'lable'%>
               <%= form.text_field :name, :class => 'input'%>
             </div>

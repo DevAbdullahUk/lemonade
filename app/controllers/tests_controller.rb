@@ -13,6 +13,12 @@ class TestsController < ApplicationController
   # GET /tests/new
   def new
     @test = Test.new
+    @project = Project.new
+    @project_list = []
+
+    ProjectUser
+    .where(userId: current_user.id)
+    .each{|record| @project_list << Project.find_by(id: record.projectId)}
   end
 
   # GET /tests/1/edit
@@ -25,7 +31,7 @@ class TestsController < ApplicationController
 
     respond_to do |format|
       if @test.save
-        format.html { redirect_to test_url(@test), notice: "Test was successfully created." }
+        format.html { redirect_to root_path, notice: "Test was successfully created." }
         format.json { render :show, status: :created, location: @test }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +71,6 @@ class TestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def test_params
-      params.require(:test).permit(:tag, :description, :name, :steps, :status)
+      params.require(:test).permit(:tag, :description, :name, :steps, :status, :project_id)
     end
 end

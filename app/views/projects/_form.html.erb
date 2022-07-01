@@ -1,4 +1,12 @@
-    <section class="modal-card-body">
+  <section class="modal-card-body">
+
+  <div class="notification is-info is-light is-flex is-align-items-center is-3">
+    <ion-icon name="information-circle-outline" size='large' class='m-2'>
+    </ion-icon>
+    <div>
+      You can configure your project in <strong> settings </strong> when its created
+    </div>
+  </div>
 
   <%= form_with(model: @project) do |form| %>
     <% if @project.errors.any? %>
@@ -22,12 +30,6 @@
       <%= form.text_field :description, :class => 'input' %>
     </div>
    
-
-    <div class="field">
-      <%= form.label "The project Id", style: "display: block", :class => 'label' %>
-      <%= form.text_field :projectId, :class => 'input', readonly: true %>
-    </div>
-
 
    <div class="field">
       <label class="checkbox">

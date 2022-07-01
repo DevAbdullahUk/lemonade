@@ -1,13 +1,13 @@
 <div id="new_project_modal" class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
+
     <header class="modal-card-head">
       <p class="modal-card-title">New Project</p>
       <button class="delete remove_new_project_modal" aria-label="close"></button>
     </header>
-    
-      <%= render :partial => "projects/form", project: @project %>
 
+    <%= render :partial => "projects/form", project: @project %>
   </div>
 </div>
 

@@ -6,47 +6,55 @@
         <th><abbr title="Test name">Test</abbr></th>
         <th><abbr title="Number of steps in the test">Steps</abbr></th>
         <th><abbr title="The Test Creation date ">Created on</abbr></th>
-        <th><abbr title="Test Description">Description</abbr></th>
+        <th><abbr title="Test Tag">Tag</abbr></th>
         <th><abbr title="Test Last Run Status">Status</abbr></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>1</th>
-        <td>38</td>
-        <td>9</td>
-        <td>10</td>
-        <td>19</td>
-        <td>
-          <span class="tag is-primary" title="Passed">
-             <ion-icon name="checkmark-done"></ion-icon>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>38</td>
-        <td>9</td>
-        <td>7</td>
-        <td>22</td>
-        <td>
-          <span class="tag is-warning" title="">
-            <ion-icon name="remove-circle-outline" ></ion-icon>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>38</td>
-        <td>3</td>
-        <td>8</td>
-        <td>27</td>
-        <td>
-          <span class="test-status-failed tag is-danger">
-            <ion-icon name="close-outline"></ion-icon>
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+      <% if !@test_cases.blank? %>
+        <% for tests in @test_cases %>
+          <tr>
+
+            <th><%= tests.id %> </th>
+            <td><%= tests.name %></td>
+            <td>UPDATE</td>
+            <td> <%= tests.created_at %></td>
+            <td><%= tests.tag %></td>
+
+            <% case tests.status
+                 when nil %>
+            <td>
+              <span class="tag is-warning" title="">
+                <ion-icon name="remove-circle-outline" ></ion-icon>
+              </span>
+            </td>
+
+            <% when 'passed' %>
+            <td>
+              <span class="tag is-primary" title="Passed">
+                <ion-icon name="checkmark-done"></ion-icon>
+              </span>
+            </td>
+
+            <% when 'failed' %>
+            <td>
+              <span class="test-status-failed tag is-danger">
+                <ion-icon name="close-outline"></ion-icon>
+              </span>
+            </td>
+
+          <% else %>
+            <td>
+              <span class="tag is-warning" title="">
+                <ion-icon name="remove-circle-outline" ></ion-icon>
+              </span>
+            </td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 </div>
