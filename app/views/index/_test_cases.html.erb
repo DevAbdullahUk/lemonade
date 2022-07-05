@@ -14,9 +14,8 @@
 
       <% if !@test_cases.blank? %>
         <% for tests in @test_cases %>
-          <tr>
-
-            <th><%= tests.id %> </th>
+          <tr>   
+            <th> <%= tests.id %> </th>
             <td><%= tests.name %></td>
             <td>UPDATE</td>
             <td> <%= tests.created_at %></td>
@@ -57,4 +56,24 @@
     <% end %>
   </tbody>
 </table>
+
+  <% if @test_cases.blank? %>
+
+  <div class="notification is-primary  is-light is-flex is-align-items-center is-justify-content-center is-3">
+    <ion-icon name="information-circle-outline" size='large' class='m-2'>
+    </ion-icon>
+    <div>
+      <%=
+        ['It is lonely here, no tests to play with.',
+        'Oopsy daisy.. no tests, it is crazy!',
+        'No test cases to display.'
+        ].sample
+      %>
+      Select a project from the side panel or create a <%= link_to "test case", new_test_path %>
+    </div>
+  </div>
+
+  <% end %>
+
+
 </div>

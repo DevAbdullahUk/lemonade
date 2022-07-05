@@ -8,15 +8,8 @@
  * @param {String} inputData the test data step
  * @param {String} inputResult the test result step
  */
-function addRow(stepId, inputAction, inputData, inputResult) {
-  $(".tb-test-steps").append(
-    `
-                <tr id="${stepId}">
-                <th>${stepId}</th>
-                <td>${inputAction}</td>
-                <td>${inputData}</td>
-                <td>${inputResult}</td>
-                <td>
+function addRow(stepId, isEditable, inputAction, inputData, inputResult) {
+  const deleteBt = `<td>
                     <button 
                     type="button" 
                     class="button is-danger is-outlined bt-test-step-remove"
@@ -29,7 +22,16 @@ function addRow(stepId, inputAction, inputData, inputResult) {
                             <ion-icon name="trash"></ion-icon>
                         </span>
                     </button>
-                </td>
+                </td>`;
+
+  $(".tb-test-steps").append(
+    `
+                <tr id="${stepId}">
+                <th>${stepId}</th>
+                <td>${inputAction}</td>
+                <td>${inputData}</td>
+                <td>${inputResult}</td>
+                ${isEditable ? deleteBt : ""}
                 </tr>
             `
   );
@@ -47,9 +49,9 @@ function cleanTable() {
  *
  * @returns
  */
-function readTestSteps() {
-  let inputSteps = $("#test-steps-input").val();
-  let newSteps = {'steps': []};
+function readTestSteps(elementId) {
+  let inputSteps = $(elementId).val();
+  let newSteps = { steps: [] };
 
   if (inputSteps) {
     try {
@@ -66,35 +68,37 @@ function updateTestSteps(newSteps) {
   $("#test-steps-input").val(JSON.stringify(newSteps));
 }
 
-function displayStep() {
-  let newSteps = readTestSteps()["steps"];
+function displayStep(isEditable) {
+  const elementId = isEditable ? "#test-steps-input" : "#test-steps-display";
+  let newSteps = readTestSteps(elementId)["steps"];
 
   newSteps.forEach((element, index) => {
-    addRow(index, ...element);
+    addRow(index, isEditable, ...element);
   });
 }
 
 function addStep(inputAction, inputData, inputResult) {
-  let newSteps = readTestSteps();
+  let newSteps = readTestSteps("#test-steps-input");
   newSteps["steps"].push([inputAction, inputData, inputResult]);
 
   updateTestSteps(newSteps);
   cleanTable();
-  displayStep();
+  displayStep(true);
 }
 
 function deleteRow(rowId) {
-  let newSteps = readTestSteps();
+  let newSteps = readTestSteps("#test-steps-input");
 
   const result = newSteps["steps"].filter((_, index) => index != rowId);
   newSteps["steps"] = result;
 
   updateTestSteps(newSteps);
   cleanTable();
-  displayStep();
+  displayStep(true);
 }
 
-$("#test-steps-input").ready(() => displayStep());
+$("#test-steps-display").ready(() => displayStep(false));
+$("#test-steps-input").ready(() => displayStep(true));
 
 $(".table-test-cases").on("click", ".bt-test-step-remove", (event) => {
   deleteRow($(event.target).attr("value"));

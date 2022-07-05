@@ -7,11 +7,13 @@ class IndexController < ApplicationController
     @project_list = get_all_projects_for_user current_user.id
 
     project_id = get_project_id(params[:project], @project_list)
-    @test_cases  = if (project_id)
-                      Test.where(project_id: project_id).order(:id).page params[:page]
-                    else
-                      Test.order(:id).page params[:page]
-                    end
+    @test_cases  = project_id.nil? ? nil : Test
+                                            .where(project_id: project_id)
+                                            .order(:id)
+                                            .page(params[:page])
+                    
+                     
+                    
   end 
 
 
@@ -32,7 +34,7 @@ class IndexController < ApplicationController
 
 
     if is_valid_project_id
-      x = project_list
+      project_list
         .filter{|project| project.projectId.eql? project_uuid}
         &.first
         &.id

@@ -16,7 +16,7 @@
   <% if !@project_list.blank? %>
     <% for project in @project_list %>
 
-      <a class="panel-block" href=<%=  "?project=#{project.projectId}" %> >
+      <a class="panel-block is-active" href=<%=  "?project=#{project.projectId}" %> >
         <span class="panel-icon">
             <ion-icon name="briefcase"></ion-icon>
         </span>

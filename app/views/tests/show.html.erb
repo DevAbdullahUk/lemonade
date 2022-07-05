@@ -1,10 +1,130 @@
-<p style="color: green"><%= notice %></p>
+<div class = 'box mt-5 mb-5 is-flex is-flex-direction-column'>
+  <div class = 'is-flex is-flex-direction-row is-fullwidth' >
+    <div>
+      <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+          <li><%=link_to 'Tests', root_path %></li>
+          <li><a href="#">Project Name</a></li>
+          <li class="is-active"><%= @test.id %> </li>
+        </ul>
+      </nav>
+    </div>
+    <div style="margin-left:auto" class ='is-flex is-flex-direction-row'>
+      <%= link_to edit_test_path(@test), :class=>'button is-light mr-1' do %>
+        <ion-icon name="create-outline"></ion-icon>
+        <span class='ml-1'> Edit </span>
+      <% end %>
+      <%= button_to @test, method: :delete, :class=>'button is-danger ml-1' do %>
+        <ion-icon name="trash-outline"></ion-icon>
+        <span class='ml-1'> Delete </span>
+      <% end %>
+    </div>
+  </div>
+  <br/>
+  <div>
+    <p class="title is-3"><%= @test.name %></p>
+    <p class="subtitle is-5">CREATED AT <%= @test.created_at.to_formatted_s(:short).upcase %> </p>
+  </div>
 
-<%= render @test %>
+  <br/> <br/>
 
-<div>
-  <%= link_to "Edit this test", edit_test_path(@test) %> |
-  <%= link_to "Back to tests", tests_path %>
+  <div>
+    <div class = 'columns is-multiline is-mobile'>
+      <div class="column is-narrow is-flex is-align-items-center">
+        <ion-icon name="person-outline"></ion-icon>
+        <span class='ml-1'> Written by </span>
+      </div>
+      <div class="column">
+        <span class="has-background-light has-text-grey p-2">
+          Auto
+        </span>
+      </div>
+    </div>
+    <div class = 'columns is-multiline is-mobile'>
+      <div class="column is-narrow is-flex is-align-items-center">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span class='ml-1'> Last updated </span>
+      </div>
+      <div class="column">
+        <span class="has-background-light has-text-grey p-2">
+          <%= @test.updated_at.to_formatted_s(:short) %>
+        </span>
+      </div>
+    </div>
+    <div class = 'columns is-multiline is-mobile'>
+      <div class="column is-narrow is-flex is-align-items-center">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <span class='ml-1'> Tag </span>
+      </div>
+      <div class="column">
+        <span class="has-background-light has-text-grey p-2">
+          <%= @test.tag %>
+        </span>
+      </div>
+    </div>
+    <div class = 'columns is-multiline is-mobile'>
+      <div class="column is-narrow is-flex is-align-items-center">
+        <ion-icon name="albums-outline"></ion-icon>
+        <span class='ml-1'> Environments </span>
+      </div>
+      <div class="column">
+        <% @test.environments.each do |env| %>
+          <span class="has-background-light has-text-grey p-2 mr-2">
+            <%= env %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <div class = 'columns is-multiline is-mobile'>
+      <div class="column is-narrow is-flex is-align-items-center">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class='ml-1'> Status </span>
+      </div>
+      <div class="column">
+        <span class="has-background-light has-text-grey p-2">
+          <% case @test.status
+                       when 'passed' %>
+          <span class='has-text-primary-dark'> Passed </span> It's last run
+          <% when 'failed' %>
+          <span class='has-text-danger-dark'> Failed </span> It's last run
+        <% else %>
+          Hasn't been run 
+        <% end %>
+      </span>
+    </div>
+  </div>
+</div>
 
-  <%= button_to "Destroy this test", @test, method: :delete %>
+
+<% if !@test.description&.empty? && !@test.description.nil? && !@test.rich_text_description.blank? %>
+  <br/>
+    <hr class="dropdown-divider">
+  <br/>
+
+  <div class="content">
+    <%= @test.description %>
+  </div>
+<% end %>
+
+<br/>
+</div>
+
+<div class= 'box mb-5 pt-3 pb-3'>
+<input hidden id='test-steps-display' value= '<%= @test.steps %>'/>
+ 
+
+
+<table class="table table-test-cases is-fullwidth">
+  <thead>
+    <tr>
+      <th><abbr title="Step ID">#</abbr></th>
+      <th><abbr title="Action">Action</abbr></th>
+      <th><abbr title="Data">Data</abbr></th>
+      <th><abbr title="Result">Result</abbr></th>
+    </tr>
+  </thead>
+  <tbody class='tb-test-steps'>
+  </tbody>
+</table>
+
 </div>

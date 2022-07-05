@@ -1,9 +1,13 @@
 class TestsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_test, only: %i[ show edit update destroy ]
 
+  
   # GET /tests or /tests.json
   def index
     @tests = Test.all
+
+
   end
 
   # GET /tests/1 or /tests/1.json
@@ -58,7 +62,7 @@ class TestsController < ApplicationController
     @test.destroy
 
     respond_to do |format|
-      format.html { redirect_to tests_url, notice: "Test was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Test was successfully deleted." }
       format.json { head :no_content }
     end
   end
