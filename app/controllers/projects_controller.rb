@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     @project.projectId = SecureRandom.uuid
 
     respond_to do |format|
-      if @project.save && set_prject_users(@project.id)
+      if @project.save && set_prject_owner(@project.id)
         format.html { redirect_to root_path, notice: "Project: #{@project.name} was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -69,9 +69,9 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:name, :description, :isPrivate)
     end
 
-    def set_prject_users(project_id)
+    def set_prject_owner(project_id)
       ProjectUser
-      .new(projectId:project_id , userId: current_user.id, accessLevel: 'uper')
+      .new(projectId:project_id , userId: current_user.id, accessLevel: 'owner')
       .save
     end
 
