@@ -27,9 +27,6 @@ module ProjectsHelper
     end
 
     def is_project_owner(user_id, project_id)
-
-      # binding.break
-
       !ProjectUser
       .where(projectId: project_id, userId: user_id, accessLevel: 'owner' )
       .empty?

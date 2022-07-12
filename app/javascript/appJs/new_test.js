@@ -5,4 +5,6 @@ $('.dp-project-item').click((event) => {
 
     $('#test_project_id').val(project_id);
     $('.bt-select-project').text(project_name);
+
+    
 })

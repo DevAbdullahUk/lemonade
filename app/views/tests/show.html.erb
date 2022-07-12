@@ -4,13 +4,13 @@
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
           <li><%=link_to 'Tests', root_path %></li>
-          <li><a href="#"><%= @project.name %></a></li>
+          <li><a href=<%="#{root_path}?project=#{params[:project]}"%>><%= @project.name %></a></li>
           <li class="is-active"><%= @test.id %> </li>
         </ul>
       </nav>
     </div>
     <div style="margin-left:auto" class ='is-flex is-flex-direction-row'>
-      <%= link_to edit_test_path(@test), :class=>'button is-light mr-1' do %>
+      <%= link_to "#{edit_test_path(@test)}?project=#{params[:project]}", :class=>'button is-light mr-1' do %>
         <ion-icon name="create-outline"></ion-icon>
         <span class='ml-1'> Edit </span>
       <% end %>

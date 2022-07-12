@@ -15,18 +15,18 @@
 
 
 
-100.times do |index|
-    Test
-        .new(tag: 'Auto_g_test',
-            name: "test_num_#{index}",
-            status: ['passed', 'failed', nil].sample,
-            project_id: 21
-        )
-        .save
+# 100.times do |index|
+#     Test
+#         .new(tag: 'Auto_g_test',
+#             name: "test_num_#{index}",
+#             status: ['passed', 'failed', nil].sample,
+#             project_id: 21
+#         )
+#         .save
 
-    end
+#     end
 
 
-# Test.destroy_all
-# Project.destroy_all
-# ProjectUser.all
+Test.destroy_all
+Project.destroy_all
+ProjectUser.all

@@ -22,5 +22,7 @@ class IndexController < ApplicationController
       .where(userId: user_id)
       .each { |record| project_list << Project.find_by(id: record.projectId) }
       .then { project_list }
+      .compact!
+    
   end
 end

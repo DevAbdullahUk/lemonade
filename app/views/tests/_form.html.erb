@@ -14,6 +14,8 @@
       <div class='tile is-parent is-3'>
         <div class ='tile is-child'>
           <div class='box'>
+
+          <% if form_type.eql?(:new) %>
             <div class='field'>
               <%= form.label :project, style: "display: block" , :class => 'lable'%>
               <%= form.number_field :project_id, id: :test_project_id, hidden: true %>
@@ -30,7 +32,7 @@
                       <% for project in @project_list %>
                         <div class="dropdown-item is-clickable">
                           <p value = <%= project.id %>
-                              class = <%= "dp-project-item" %>
+                              class = "dp-project-item"
                           ><%= project.name %></p>
                         </div>
                       <% end %>
@@ -50,6 +52,13 @@
                 </div>
               </div>
             </div>
+          <% elsif form_type.eql?(:edit) %>
+            <div class='field'>
+              <%= form.label :project, style: "display: block" , :class => 'lable'%>
+              <input class="input" type="text" placeholder="<%= @project.name %>" disabled>
+            </div>
+          <% end %>
+
             <div class='field'>
               <%= form.label :name, style: "display: block" , :class => 'lable'%>
               <%= form.text_field :name, :class => 'input'%>

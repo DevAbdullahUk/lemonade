@@ -14,7 +14,8 @@
 
       <% if !@test_cases.blank? %>
         <% for tests in @test_cases %>
-          <tr>   
+          <tr class= 'test-case-row' 
+          link='<%= "#{test_path(tests)}?project=#{params[:project]}"%>' > 
             <th> <%= tests.id %> </th>
             <td><%= tests.name %></td>
             <td>UPDATE</td>
